@@ -36,19 +36,29 @@
 .home-section {
     position: relative;
 }
+.add-button-container{
+    position: absolute;
+    top: 10px;
+    right: 130px;
+}
+.btn-add{
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
 .edit-button-container {
     position: absolute;
     top: 10px;
     right: 30px;
 }
-.btn-edit a{
-    text-decoration: none;
-    color: #fff;
-}
 
 .btn-edit {
     background-color: #007bff;
+    color: #fff;
     padding: 8px 16px;
     border: none;
     border-radius: 5px;

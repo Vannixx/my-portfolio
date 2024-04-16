@@ -25,13 +25,11 @@
                     <label for="userRole">User Role:</label>
                     <input type="text" class="form-control" id="userRole" name="userRole" value="{{$userData->userRole}}">
                 </div>
-
-                {{-- <div class="form-group">
-                    <div class="form-group">
-                        <label for="userImage">Current User Image:</label>
-                        <img src="" class="form-control-file" id="userImage" alt="User Image" width="100">
-                    </div>
-                </div> --}}
+                
+                <div class="info-item">
+                    <strong>Current Image:</strong>
+                    <img src="{{ asset ($userData->userImage) }}" alt="User Image" width="100" height="auto">
+                </div>
 
                 <div class="form-group">
                     <label for="userImage">User Image:</label>

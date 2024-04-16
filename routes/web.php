@@ -46,6 +46,10 @@ Route::group(['middleware' =>'auth'], function (){
     Route::get('admin/edit-profile/{id}', [userProfile::class, 'editProfile'])->name('admin.editProfile');
     Route::put('admin/update-profile/{id}', [userProfile::class, 'updateProfile'])->name('admin.updateProfile');
 
+    //add view page
+    Route::get('admin/add', [userProfile::class, 'addPost'])->name('admin.addInfo');
+    Route::post('admin/add-info', [userProfile::class, 'userPost'])->name('add.post');
+
 });
 
 //login & logout Routes

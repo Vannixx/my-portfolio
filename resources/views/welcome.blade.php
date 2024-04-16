@@ -62,7 +62,7 @@
             <div class="about-content">
                 <div data-aos="zoom-in" data-aos-delay="200" class="content-holder">
                     <div class="gif-holder">
-                        <img src="assets/img/mypic.png" alt="">
+                        <img src="{{ asset ($item->userImage) }}" alt="">
                     </div>
                 </div>
 
