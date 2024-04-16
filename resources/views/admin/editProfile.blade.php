@@ -16,23 +16,22 @@
 
             <form method="POST" action="" enctype="multipart/form-data">
                 @csrf <!-- Add this for CSRF protection -->
-                {{-- @method('put') --}}
+                @method('put')
                 <div class="form-group">
                     <label for="userName">Username:</label>
-                    <input type="text" class="form-control" id="userName" name="userName" placeholder="Enter username">
+                    <input type="text" class="form-control" id="userName" name="userName" value="{{$userData->userName}}">
                 </div>
                 <div class="form-group">
                     <label for="userRole">User Role:</label>
-                    <input type="text" class="form-control" id="userRole" name="userRole" placeholder="Enter user role">
+                    <input type="text" class="form-control" id="userRole" name="userRole" value="{{$userData->userRole}}">
                 </div>
                 <div class="form-group">
                     <label for="userImage">User Image:</label>
-                    <input type="file" class="form-control-file" id="userImage" name="userImage">
+                    <input type="file" class="form-control-file" id="userImage" name="userImage" value="">
                 </div>
                 <div class="form-group">
                     <label for="description">Description:</label>
-                    <textarea class="form-control" id="description" name="description" rows="3"
-                        placeholder="Enter description"></textarea>
+                    <textarea class="form-control" id="description" name="description" rows="3" value="{{$userData->description}}"></textarea>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Submit</button>

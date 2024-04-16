@@ -33,11 +33,10 @@ Route::group(['middleware' =>'auth'], function (){
     Route::get('admin/projects', [userProfile::class, 'userProjects'])->name('userprojects');    
 
     //edit userProfile
-    Route::get('admin/edit-profile', [userProfile::class, 'editProfile'])->name('editProfile');
-    Route::put('admin');
+    Route::get('admin/update-profile/{id}', [userProfile::class, 'editProfile'])->name('editProfile');
 });
 
-//login / logout Routes
+//login & logout Routes
 Route::get('/admin/login', [AuthAdmin::class, 'login'])->name( 'login' );
 Route::post('/admin/register', [AuthAdmin::class, 'registerPost'])->name( 'register.post');
 Route::post('/admin/login', [AuthAdmin::class, 'loginPost'])->name('login.post');

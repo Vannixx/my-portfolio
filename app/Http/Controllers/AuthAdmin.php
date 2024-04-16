@@ -14,7 +14,7 @@ class AuthAdmin extends Controller
     //to check if nag-log in ang user
     function login(){
         if(Auth::check()){
-            return redirect()->intended(route('dashboard'))->with("success");
+            return redirect()->intended(route('userprofile'))->with("success");
         }
         return view('admin.Login');
     }

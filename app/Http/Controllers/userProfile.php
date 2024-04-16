@@ -15,9 +15,11 @@ class userProfile extends Controller
         return view('admin.userProfile', compact('pageTitle', 'userData'));
     }
 
-    function editProfile(){
+    function editProfile(int $id){
+        $userData = userTable::findOrFail($id);
+        // $userData = userTable::where('id', $id)->firstOrFail();
         $pageTitle = 'Admin | Edit Profile';
-        return view('admin.editProfile', compact('pageTitle'));
+        return view('admin.editProfile', compact('pageTitle', 'userData'));
     }
 
 
