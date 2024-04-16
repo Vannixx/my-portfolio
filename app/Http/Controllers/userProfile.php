@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\userTable;
+
 use Illuminate\Http\Request;
 
 class userProfile extends Controller
@@ -10,6 +12,25 @@ class userProfile extends Controller
     function userProfile(){
         $pageTitle = 'Admin | User Profile';
         return view('admin.userProfile', compact('pageTitle'));
+    }
+
+    //add/save data to user profile
+    function userPost(Request $request){
+        $request->validate([
+            'userName' => 'required',
+            'userRole' => 'required',
+            'userImage' => 'required',
+            'description' => 'required',
+        ]);
+
+        userTable::create([
+            'userName' => $request->userName,
+            'userRole' => $request->userRole,
+            'userImage' => $request->userImage,
+            'description' => $request->description,
+        ]);
+
+        return redirect();
     }
 
     //view user social
