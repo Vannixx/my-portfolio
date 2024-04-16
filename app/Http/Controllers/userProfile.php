@@ -10,9 +10,16 @@ class userProfile extends Controller
 {
     //view user profile
     function userProfile(){
+        $userData = userTable::all();
         $pageTitle = 'Admin | User Profile';
-        return view('admin.userProfile', compact('pageTitle'));
+        return view('admin.userProfile', compact('pageTitle', 'userData'));
     }
+
+    function editProfile(){
+        $pageTitle = 'Admin | Edit Profile';
+        return view('admin.editProfile', compact('pageTitle'));
+    }
+
 
     //add/save data to user profile
     function userPost(Request $request){
@@ -30,7 +37,7 @@ class userProfile extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect();
+        return redirect(route('admin.userProfile'));
     }
 
     //view user social

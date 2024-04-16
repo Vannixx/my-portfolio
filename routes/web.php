@@ -30,7 +30,11 @@ Route::group(['middleware' =>'auth'], function (){
     Route::get('admin/userprofile', [userProfile::class, 'userProfile'])->name('userprofile');
     Route::get('admin/socials', [userProfile::class, 'userSocial'])->name('usersocial');
     Route::get('admin/skills', [userProfile::class, 'userSkills'])->name('userskills');
-    Route::get('admin/projects', [userProfile::class, 'userProjects'])->name('userprojects');
+    Route::get('admin/projects', [userProfile::class, 'userProjects'])->name('userprojects');    
+
+    //edit userProfile
+    Route::get('admin/edit-profile', [userProfile::class, 'editProfile'])->name('editProfile');
+    Route::put('admin');
 });
 
 //login / logout Routes
