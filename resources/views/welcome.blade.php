@@ -40,13 +40,15 @@
     </section>
 
     <!-- short intro about me -->
+{{-- @if(isset($userData) && $userData->count() > 0) --}}
+    @foreach($userData as $item) 
     <div class="wrapper">
         <div class="short-intro">
             <h1 class="name-holder">
-                Hello, I'm <span id="my-name">Fred Ritz Vann De Guzman</span>
+                Hello, I'm <span id="my-name">{{ $item->userName }} </span>
             </h1>
             <h2 class="pos-holder">
-                Front end Developer
+                {{ $item->userRole }}
             </h2>
         </div>
     </div>
@@ -66,16 +68,16 @@
 
                 <div data-aos="zoom-in" data-aos-delay="200" class="content-holder">
                     <div class="txt-container">
-                        <p>Greetings! I am a 23-year-old soon-to-be graduate from Western Mindanao State University, 
-                            residing in the locale of Kitabog Titay, Zamboanga Sibugay. 
-                            With a blend of academic rigor and real-world experiences, I am ready to transition into the professional realm. 
-                            My journey thus far has equipped me with valuable skills, a thirst for knowledge, and a determination to make a positive impact.
-                        </p>
+                        <p>{{$item->description}}</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    @endforeach
+{{-- @else
+    <p>No user data found.</p>
+@endif --}}
 
     <!-- skills -->
     <section id="skills">

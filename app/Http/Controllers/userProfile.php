@@ -3,11 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\userTable;
-
+use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
 
-class userProfile extends Controller
-{
+class userProfile extends Controller{
+
+    public function index(){
+        $userData = userTable::all(); // Fetch all user data
+        // Return the view with the $userData variable
+        return view('welcome', ['userData' => $userData]);
+    }
+
     //view user profile
     function userProfile(){
         $userData = userTable::all();
@@ -22,13 +28,14 @@ class userProfile extends Controller
         return view('admin.editProfile', compact('pageTitle', 'userData'));
     }
 
+    //update profile
     function updateProfile(Request $request, $id)
     {
         $request->validate([
             'userName' => 'required',
             'userRole' => 'required',
             'userImage' => 'image|mimes:jpeg,png,jpg,gif', // Example validation for image upload
-            'description' => 'required',
+            'description' => 'required|string|max:500',
         ]);
 
         $userData = UserTable::findOrFail($id);
@@ -52,15 +59,15 @@ class userProfile extends Controller
     }
 
 
-    //add/save data to user profile
+    //add data
     function userPost(Request $request){
         $request->validate([
             'userName' => 'required|string|max:255',
             'userRole' => 'required|string|max:255',
             'userImage' => 'required',
-            'description' => 'required|string',
+            'description' => 'required|string|max:500',
         ]);
-        $imagePath = $request->file('userImage')->store('app/public/images');
+        $imagePath = $request->file('userImage')->store('uploads/images');
         userTable::create([
             'userName' => $request->userName,
             'userRole' => $request->userRole,
