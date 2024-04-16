@@ -6,6 +6,8 @@ use App\Models\userTable;
 use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+
 
 
 class userProfile extends Controller{
@@ -23,6 +25,7 @@ class userProfile extends Controller{
         return view('admin.userProfile', compact('pageTitle', 'userData'));
     }
 
+    //edit view page
     public function editProfile(int $id){
         $userData = userTable::findOrFail($id);
         // $userData = userTable::where('id', $id)->firstOrFail();
@@ -30,7 +33,7 @@ class userProfile extends Controller{
         return view('admin.editProfile', compact('pageTitle', 'userData'));
     }
 
-    //update profile
+    //(update or edit profile)
     public function updateProfile(Request $request, $id)
 {
     $request->validate([
@@ -40,7 +43,7 @@ class userProfile extends Controller{
         'description' => 'required|string|max:500',
     ]);
 
-    $userData = userTable::findOrFail($id);
+    $userData = UserTable::findOrFail($id);
 
     // Update user data based on the form input
     $userData->userName = $request->userName;
@@ -50,12 +53,17 @@ class userProfile extends Controller{
     // Handle user image upload if a new image is provided
     if ($request->hasFile('userImage')) {
         // Delete the previous image if it exists
-        if (Storage::exists($userData->userImage)) {
-            Storage::delete($userData->userImage);
+        if (File::exists(public_path($userData->userImage))) {
+            File::delete(public_path($userData->userImage));
         }
 
-        // Move and store the new image
-        $imagePath = $request->file('userImage')->store('uploads/images', 'public');
+        // Move and store the new image with a unique filename
+        $uploadedFile = $request->file('userImage');
+        $extension = $uploadedFile->getClientOriginalExtension();
+        $fileName = uniqid() . '.' . $extension;
+        $uploadedFile->move(public_path('uploads/images'), $fileName);
+        $imagePath = 'uploads/images/' . $fileName;
+
         $userData->userImage = $imagePath;
     }
 
