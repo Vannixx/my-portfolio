@@ -26,20 +26,22 @@ class userProfile extends Controller
     //add/save data to user profile
     function userPost(Request $request){
         $request->validate([
-            'userName' => 'required',
-            'userRole' => 'required',
+            'userName' => 'required|string|max:255',
+            'userRole' => 'required|string|max:255',
             'userImage' => 'required',
-            'description' => 'required',
+            'description' => 'required|string',
         ]);
-
+        $imagePath = $request->file('userImage')->store('app/public/images');
         userTable::create([
             'userName' => $request->userName,
             'userRole' => $request->userRole,
-            'userImage' => $request->userImage,
+            // 'userImage' => $request->userImage,
+            'userImage'=> $imagePath,
             'description' => $request->description,
         ]);
 
-        return redirect(route('admin.userProfile'));
+        return redirect()->route('admin.userProfile');
+        // return redirect(route('admin.userProfile'));
     }
 
     //view user social

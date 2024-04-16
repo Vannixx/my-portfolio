@@ -12,11 +12,13 @@
             <span class="text">Profile</span>
         </div>
     
-        <div class="edit-button-container">
-            <button class="btn btn-edit"><a href="#">Edit</a></button>
-        </div>
-    
         @foreach ($userData as $item)
+
+        <div class="edit-button-container">
+            {{-- <button class="btn btn-edit"><a href="{{ route('admin/'.$userData->id.'/update-profile') }}">Update</a></button> --}}
+            <button class="btn btn-edit"><a href="{{ route('admin.editProfile', ['id' => $item->id]) }}">Update</a></button>
+        </div>
+
         <div class="info-container">
             <div class="info-content">
                 <div class="info-item">
@@ -29,7 +31,7 @@
                 </div>
                 <div class="info-item">
                     <strong>User Image:</strong>
-                    <img src="path_to_user_image.jpg" alt="User Image" width="100">
+                    <img src="/assets/img/mypic.png" alt="User Image" width="100">
                 </div>
                 <div class="info-item">
                     <strong>Description:</strong>
