@@ -14,7 +14,7 @@
 
         <div class="container">
 
-            <form method="POST" action="" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('admin.updateProfile', ['id' => $userData->id]) }}" enctype="multipart/form-data">
                 @csrf
                 @method('put')
                 <div class="form-group">
@@ -26,10 +26,18 @@
                     <input type="text" class="form-control" id="userRole" name="userRole" value="{{$userData->userRole}}">
                 </div>
 
+                {{-- <div class="form-group">
+                    <div class="form-group">
+                        <label for="userImage">Current User Image:</label>
+                        <img src="" class="form-control-file" id="userImage" alt="User Image" width="100">
+                    </div>
+                </div> --}}
+
                 <div class="form-group">
                     <label for="userImage">User Image:</label>
                     <input type="file" class="form-control-file" id="userImage" name="userImage">
                 </div>
+
                 <div class="form-group">
                     <label for="description">Description:</label>
                     <textarea class="form-control" id="description" name="description" rows="5">{{ $userData->description }}</textarea>

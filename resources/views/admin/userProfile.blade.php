@@ -31,7 +31,7 @@
                 </div>
                 <div class="info-item">
                     <strong>User Image:</strong>
-                    <img src="/assets/img/mypic.png" alt="User Image" width="100">
+                    <img src="{{ $item->userImage }}" alt="User Image" width="100">
                 </div>
                 <div class="info-item">
                     <strong>Description:</strong>

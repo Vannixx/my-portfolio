@@ -35,6 +35,7 @@ Route::group(['middleware' =>'auth'], function (){
     //edit userProfile
     // Route::get('admin/{id}/update-profile', [userProfile::class, 'editProfile'])->name('editProfile');
     Route::get('admin/edit-profile/{id}', [userProfile::class, 'editProfile'])->name('admin.editProfile');
+    Route::put('admin/update-profile/{id}', [userProfile::class, 'updateProfile'])->name('admin.updateProfile');
 
 });
 

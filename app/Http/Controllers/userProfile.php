@@ -22,6 +22,35 @@ class userProfile extends Controller
         return view('admin.editProfile', compact('pageTitle', 'userData'));
     }
 
+    function updateProfile(Request $request, $id)
+    {
+        $request->validate([
+            'userName' => 'required',
+            'userRole' => 'required',
+            'userImage' => 'image|mimes:jpeg,png,jpg,gif', // Example validation for image upload
+            'description' => 'required',
+        ]);
+
+        $userData = UserTable::findOrFail($id);
+
+        // Update user data based on the form input
+        $userData->userName = $request->userName;
+        $userData->userRole = $request->userRole;
+        $userData->description = $request->description;
+
+        // Handle user image upload if a new image is provided
+        if ($request->hasFile('userImage')) {
+            $imagePath = $request->file('userImage')->store('uploads/images');
+            $userData->userImage = $imagePath;
+        }
+
+        // Save the updated user data
+        $userData->save();
+
+        // Redirect back to the user profile or any other appropriate route
+        return redirect()->route('userprofile')->with('success', 'Profile updated successfully');
+    }
+
 
     //add/save data to user profile
     function userPost(Request $request){
