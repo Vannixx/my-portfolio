@@ -34,8 +34,7 @@ class userProfile extends Controller{
     }
 
     //(update or edit profile)
-    public function updateProfile(Request $request, $id)
-{
+    public function updateProfile(Request $request, $id){
     $request->validate([
         'userName' => 'required',
         'userRole' => 'required',

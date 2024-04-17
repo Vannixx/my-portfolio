@@ -3,7 +3,7 @@
 @section('title', $pageTitle)
 
 @section('content')
-    @extends('admin.dashboard')
+    @include('admin.dashboard')
 
     <section class="home-section">
 
@@ -11,18 +11,13 @@
             <i class='bx bx-menu'></i>
             <span class="text">Profile</span>
         </div>
-    
+            
         @foreach ($userData as $item)
-
         <div class="edit-button-container">
             {{-- <button class="btn btn-edit"><a href="{{ route('admin/'.$userData->id.'/update-profile') }}">Update</a></button> --}}
-            <button class="btn btn-edit" onclick="updateBtn()">Update</button>
+            <button class="btn btn-edit"><a href="{{ route('admin.editProfile', ['id' => $item->id]) }}">Update</a></button>
         </div>
-
-        <div class="add-button-container">
-            <button class="btn btn-add" onclick="addBtn()">Add</button>
-        </div>
-
+        
         <div class="info-container">
             <div class="info-content">
                 <div class="info-item">
@@ -44,20 +39,7 @@
                 </div>
             </div>
         </div>   
-        @endforeach 
+        @endforeach
     
     </section>
-
-    <script>
-        function updateBtn(){
-            window.location.href = "{{ route('admin.editProfile', ['id' => $item->id]) }}";
-        }
-
-        function addBtn(){
-            window.location.href = "{{ route('admin.addInfo') }}";
-        }
-
-    </script>
-    
-
 @endsection

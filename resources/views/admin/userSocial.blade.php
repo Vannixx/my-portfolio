@@ -3,7 +3,7 @@
 @section('title', $pageTitle)
 
 @section('content')
-    @extends('admin.dashboard')
+    @include('admin.dashboard')
 
     <section class="home-section">
         <div class="home-content">
