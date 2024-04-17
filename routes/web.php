@@ -50,6 +50,9 @@ Route::group(['middleware' =>'auth'], function (){
     Route::get('admin/add', [userProfile::class, 'addPost'])->name('admin.addInfo');
     Route::post('admin/add-info', [userProfile::class, 'userPost'])->name('add.post');
 
+    //Socials Route
+    Route::get('admin/add-socials',[userProfile::class, 'Social'])->name('addsocial');
+
 });
 
 //login & logout Routes

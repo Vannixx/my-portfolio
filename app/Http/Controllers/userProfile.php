@@ -8,13 +8,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 
-
-
 class userProfile extends Controller{
 
     public function index(){
-        $userData = userTable::all(); // Fetch all user data
-        // Return the view with the $userData variable
+        $userData = userTable::all();
         return view('welcome', ['userData' => $userData]);
     }
 
@@ -28,7 +25,6 @@ class userProfile extends Controller{
     //edit view page
     public function editProfile(int $id){
         $userData = userTable::findOrFail($id);
-        // $userData = userTable::where('id', $id)->firstOrFail();
         $pageTitle = 'Admin | Edit Profile';
         return view('admin.editProfile', compact('pageTitle', 'userData'));
     }
@@ -38,7 +34,7 @@ class userProfile extends Controller{
     $request->validate([
         'userName' => 'required',
         'userRole' => 'required',
-        'userImage' => 'image|mimes:jpeg,png,jpg,gif|max:10240', // Example validation for image upload
+        'userImage' => 'image|mimes:jpeg,png,jpg,gif|max:10240', 
         'description' => 'required|string|max:500',
     ]);
 
@@ -119,6 +115,16 @@ class userProfile extends Controller{
         return view('admin.userSocial', compact('pageTitle'));
     }
 
+    //view add social
+    public function Social(){
+        $pageTitle = 'Admin | Add Socials';
+        return view('admin.addSocial', compact('pageTitle'));
+    }
+    //add or save social
+    public function addSocial(){
+        
+    }
+
     //view user skills
     public function userSkills(){
         $pageTitle = 'Admin | Skills';
@@ -130,7 +136,4 @@ class userProfile extends Controller{
         $pageTitle = 'Admin | Projects';
         return view('admin.userProjects' , compact('pageTitle'));
     }
-
-
-    //Create/Add user profile
 }

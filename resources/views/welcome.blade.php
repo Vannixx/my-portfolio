@@ -1,4 +1,4 @@
-@extends('content')
+@include('content')
 <html>
     <body class="antialiased">
 
