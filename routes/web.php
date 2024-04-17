@@ -28,21 +28,14 @@ Route::get('/default', function () {
 //     return view('welcome');
 // });
 
-// Route::get('/', function () {
-//     return view('');
-// });
-
-
 //ADMIN view Routes
 Route::group(['middleware' =>'auth'], function (){
-    // Route::get('admin/dashboard', [AuthAdmin::class, 'dashboard'])->name('dashboard');
     Route::get('admin/userprofile', [userProfile::class, 'userProfile'])->name('userprofile');
     Route::get('admin/socials', [userProfile::class, 'userSocial'])->name('usersocial');
     Route::get('admin/skills', [userProfile::class, 'userSkills'])->name('userskills');
     Route::get('admin/projects', [userProfile::class, 'userProjects'])->name('userprojects');    
 
     //edit/update userProfile
-    // Route::get('admin/{id}/update-profile', [userProfile::class, 'editProfile'])->name('editProfile');
     Route::get('admin/edit-profile/{id}', [userProfile::class, 'editProfile'])->name('admin.editProfile');
     Route::put('admin/update-profile/{id}', [userProfile::class, 'updateProfile'])->name('admin.updateProfile');
 
