@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\userTable;
+use App\Models\socialTable;
 use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -109,29 +110,55 @@ class userProfile extends Controller{
         }
     }
 
-    //view user social
+    //to view user social
     public function userSocial() {
         $pageTitle = 'Admin | Socials';
         return view('admin.userSocial', compact('pageTitle'));
     }
 
-    //view add social
+    //to view add social page
     public function Social(){
         $pageTitle = 'Admin | Add Socials';
         return view('admin.addSocial', compact('pageTitle'));
     }
-    //add or save social
-    public function addSocial(){
-        
+    //function for adding social
+    public function socialAdd(Request $request){
+        $request->validate([
+            'socialIcons' => 'required',
+            'socialLink' => 'required',
+        ]);
+
+        try {
+            if($request->hasFile('socialIcons')){
+                $uploadedFile = $request->file('socialIcons');
+                $extension = $uploadedFile->getClientOriginalExtension();
+                $fileName = uniqid() . '.' . $extension;
+                
+                $uploadedFile->move(public_path('uploads/socials'), $fileName);
+                $imagePath = 'uploads/socials/' . $fileName;
+
+                socialTable::create([
+                    'socialIcons' => $imagePath,
+                    'socialLink' => $request->socialLink,
+                ]);
+
+                return redirect(route('usersocial'))->with('success', 'User added successfully!');
+            } else {
+                return redirect()->back()->with('error', 'Please upload a user image.');
+            }
+
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred. Please try again later.');
+        }
     }
 
-    //view user skills
+    //to view user skills
     public function userSkills(){
         $pageTitle = 'Admin | Skills';
         return view('admin.userSkills', compact('pageTitle'));
     }
 
-    //view user projects
+    //to view user projects
     public function userProjects(){
         $pageTitle = 'Admin | Projects';
         return view('admin.userProjects' , compact('pageTitle'));

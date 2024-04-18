@@ -28,46 +28,11 @@
                     <p>link here</p>
                 </div>
                 <div class="card-buttons">
-                    <button class="btn-update" onclick="editProfile()">Update</button>
-                    <button class="btn-delete" onclick="deleteProfile()">Delete</button>
+                    <button class="btn-update" onclick="updateSocial()">Update</button>
+                    <button class="btn-delete" onclick="deleteSocial()">Delete</button>
                 </div>
             </div>
 
-            <div class="card">
-                <img src="/assets/img/facebook.png" alt="User Image">
-                <div class="card-content">
-                    <label for="">Link</label>
-                    <p>link here</p>
-                </div>
-                <div class="card-buttons">
-                    <button class="btn-update" onclick="editProfile()">Update</button>
-                    <button class="btn-delete" onclick="deleteProfile()">Delete</button>
-                </div>
-            </div>
-    
-            <div class="card">
-                <img src="/assets/img/twitter.png" alt="User Image">
-                <div class="card-content">
-                    <label for="">Link</label>
-                    <p>link here</p>
-                </div>
-                <div class="card-buttons">
-                    <button class="btn-update" onclick="editProfile()">Update</button>
-                    <button class="btn-delete" onclick="deleteProfile()">Delete</button>
-                </div>
-            </div>
-    
-            <div class="card">
-                <img src="/assets/img/linkedin.png" alt="User Image">
-                <div class="card-content">
-                    <label for="">Link</label>
-                    <p>link here</p>
-                </div>
-                <div class="card-buttons">
-                    <button class="btn-update" onclick="editProfile()">Update</button>
-                    <button class="btn-delete" onclick="deleteProfile()">Delete</button>
-                </div>
-            </div>
         </div> 
       
     </section>

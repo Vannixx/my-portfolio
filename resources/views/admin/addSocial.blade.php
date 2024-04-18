@@ -13,18 +13,17 @@
 
         
         <div class="container">
-
-            <form method="POST" action="#" enctype="multipart/form-data">
-                @csrf <!-- Add this for CSRF protection -->
+            <form method="POST" action="{{ route('socialadd.post') }}" enctype="multipart/form-data">
+                @csrf
         
                 <div class="form-group">
                     <label for="socialIcon">Social Icon:</label>
-                    <input type="file" class="form-control-file" id="socialIcon" name="socialIcon" accept="image/*">
+                    <input type="file" class="form-control-file" id="socialIcon" name="socialIcons" accept="image/*">
                 </div>
         
                 <div class="form-group">
                     <label for="socialLink">Social Link:</label>
-                    <input type="url" class="form-control" id="socialLink" name="socialLink" placeholder="Enter social link">
+                    <input type="url" class="form-control social-box" id="socialLink" name="socialLink" placeholder="Enter social link">
                 </div>
         
                 <button type="submit" class="btn btn-primary">Submit</button>

@@ -33,7 +33,7 @@
                     {{-- {{ Storage::url('uploads/images/' . $item->userImage) }} --}}
                     <img src="{{ asset ($item->userImage) }}" alt="User Image" width="100" height="auto">
                 </div>
-                <div class="info-item">
+                <div class="info-item" style="text-align: justify">
                     <strong>Description:</strong>
                     <span>{{ $item->description }}</span>
                 </div>
