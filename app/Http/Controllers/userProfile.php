@@ -113,7 +113,15 @@ class userProfile extends Controller{
     //to view user social
     public function userSocial() {
         $pageTitle = 'Admin | Socials';
-        return view('admin.userSocial', compact('pageTitle'));
+        $socialData = SocialTable::all();
+        return view('admin.userSocial', compact('pageTitle', 'socialData'));
+    }
+
+    //update view page of social
+    public function socialUp(){
+        // $socialData = SocialTable::findOrFail($id); ,'socialData'
+        $pageTitle = 'Admin | Update Social';
+        return view('admin.socialUpdate', compact('pageTitle'));
     }
 
     //to view add social page
@@ -121,6 +129,7 @@ class userProfile extends Controller{
         $pageTitle = 'Admin | Add Socials';
         return view('admin.addSocial', compact('pageTitle'));
     }
+
     //function for adding social
     public function socialAdd(Request $request){
         $request->validate([
@@ -150,6 +159,11 @@ class userProfile extends Controller{
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'An error occurred. Please try again later.');
         }
+    }
+
+    //function for updating socials
+    public function updateSocial(){
+
     }
 
     //to view user skills

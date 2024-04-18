@@ -45,6 +45,7 @@ Route::group(['middleware' =>'auth'], function (){
 
     //Socials Route
     Route::get('admin/socials-add',[userProfile::class, 'Social'])->name('addsocial');
+    Route::get('admin/social-update',[userProfile::class, 'socialUp'])->name('socialupdate');
     Route::post('admin/add-social',[userProfile::class, 'socialAdd'])->name('socialadd.post');
 
 });
