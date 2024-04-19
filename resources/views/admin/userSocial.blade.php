@@ -29,10 +29,16 @@
                             <label for="">Link</label>
                             <p class="link-container">{{ $social->socialLink }}</p>
                         </div>
-                        <div class="card-buttons">
-                            <button class="btn-update" onclick="updateSocial()"><i class="material-icons">edit</i></button>
-                            <button class="btn-delete" onclick="deleteSocial()"><i class="material-icons">delete</i></button>
-                        </div>
+                        <form id="deleteForm" action="{{ route('social.delete', $social->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <div class="card-buttons">
+                                <button type="button" class="btn-update" onclick="window.location.href = '{{ route('socialupdate') }}';"><i class="material-icons">edit</i></button>
+                                <button type="submit" class="btn-delete" onclick="return confirm('Are you sure you want to delete this project?')">
+                                    <i class="material-icons">delete</i>
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 @endforeach
             @endif
@@ -43,12 +49,7 @@
         window.location.href = "{{ route('addsocial') }}";
     }
 
-    function updateSocial(){
-        window.location.href = "{{ route('socialupdate')}}";
-    }
-    function deleteSocial(){
-        window.location.href = "#";
-    }
+    
 </script>
       
     </section>

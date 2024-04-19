@@ -16,7 +16,7 @@ class userProfile extends Controller{
     public function index(){
         $userData = userTable::all();
         $socialData = socialTable::all();
-        
+
         View::share('socialData', $socialData);
         return view('welcome', ['userData' => $userData]);
     }
@@ -135,6 +135,15 @@ class userProfile extends Controller{
         return view('admin.addSocial', compact('pageTitle'));
     }
 
+    public function socialDelete($id){
+        $social = socialTable::findOrFail($id);
+        if ($social->socialIcons) {
+            File::delete($social->socialIcons);
+        }
+        $social->delete();
+        return redirect()->route('usersocial')->with('success', 'Project deleted successfully!');
+    }
+
     //function for adding social
     public function socialAdd(Request $request){
         $request->validate([
@@ -183,6 +192,16 @@ class userProfile extends Controller{
     public function skillView(){
         $pageTitle = 'Admin | Add Skills';
         return view('admin.addSkills', compact('pageTitle'));
+    }
+
+    //function for deleting skills
+    public function deleteSkills($id){
+        $skill = skillTable::findOrFail($id);
+        if ($skill->skillImage) {
+            File::delete($skill->skillImage);
+        }
+        $skill->delete();
+        return redirect()->route('userskills')->with('success', 'Project deleted successfully!');
     }
 
     //add funciton for skills
@@ -261,6 +280,16 @@ class userProfile extends Controller{
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'An error occurred. Please try again later.');
         }
+    }
+
+    //function to delete project
+    public function deleteProject($id){
+        $project = projectTable::findOrFail($id);
+        if ($project->projectImage) {
+            File::delete($project->projectImage);
+        }
+        $project->delete();
+        return redirect()->route('userprojects')->with('success', 'Project deleted successfully!');
     }
 
 

@@ -35,9 +35,15 @@
                     <p class="proj-description">{{ $project->description }}</p>
                   </div>
 
-                  <div class="card-buttons" style="display: flex; justify-content: flex-end;">
-                      <button class="btn-delete" onclick="deleteSkill()"><i class="material-icons">delete</i></button>
-                  </div>
+                  <form id="deleteForm" action="{{ route('project.delete', $project->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <div class="card-buttons" style="display: flex; justify-content: flex-end;">
+                      <button type="submit" class="btn-delete" onclick="return confirm('Are you sure you want to delete this project?')">
+                        <i class="material-icons">delete</i>
+                      </button>
+                    </div>
+                </form>
               </div>
           @endforeach
       @endif

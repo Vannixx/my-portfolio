@@ -47,16 +47,21 @@ Route::group(['middleware' =>'auth'], function (){
     Route::get('admin/socials-add',[userProfile::class, 'Social'])->name('addsocial');
     Route::get('admin/social-update',[userProfile::class, 'socialUp'])->name('socialupdate');
     Route::post('admin/add-social',[userProfile::class, 'socialAdd'])->name('socialadd.post');
+    Route::delete('admin/socials-delete/{id}',[userProfile::class, 'socialDelete'])->name('social.delete');
 
-    // Skills Route
-    Route::get('admin/skills-add', [userProfile::class, 'skillView'])->name('skillview');
+    //Skills Route
     //skills add route
+    //delete skills function route
+    Route::get('admin/skills-add', [userProfile::class, 'skillView'])->name('skillview');
     Route::post('admin/add-skill',[userProfile::class, 'skill_ADD'])->name('skilladd.post');
+    Route::delete('admin/skills-delete/{id}',[userProfile::class, 'deleteSkills'])->name('skill.delete');
 
     //projects route
-    Route::get('admin/projects-add', [userProfile::class, 'projectView'])->name('projectview');
     //project add route
+    //delete project function route
+    Route::get('admin/projects-add', [userProfile::class, 'projectView'])->name('projectview');
     Route::post('admin/add-project',[userProfile::class, 'addProject'])->name('projectadd.post');
+    Route::delete('admin/project-delete/{id}',[userProfile::class, 'deleteProject'])->name('project.delete');
 
 });
 
