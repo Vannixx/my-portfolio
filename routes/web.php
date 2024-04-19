@@ -39,7 +39,7 @@ Route::group(['middleware' =>'auth'], function (){
     Route::get('admin/edit-profile/{id}', [userProfile::class, 'editProfile'])->name('admin.editProfile');
     Route::put('admin/update-profile/{id}', [userProfile::class, 'updateProfile'])->name('admin.updateProfile');
 
-    //add view page
+    //add view page (remove this later on)
     Route::get('admin/add', [userProfile::class, 'addPost'])->name('admin.addInfo');
     Route::post('admin/add-info', [userProfile::class, 'userPost'])->name('add.post');
 
@@ -47,6 +47,16 @@ Route::group(['middleware' =>'auth'], function (){
     Route::get('admin/socials-add',[userProfile::class, 'Social'])->name('addsocial');
     Route::get('admin/social-update',[userProfile::class, 'socialUp'])->name('socialupdate');
     Route::post('admin/add-social',[userProfile::class, 'socialAdd'])->name('socialadd.post');
+
+    // Skills Route
+    Route::get('admin/skills-add', [userProfile::class, 'skillView'])->name('skillview');
+    //skills add route
+    Route::post('admin/add-skill',[userProfile::class, 'skill_ADD'])->name('skilladd.post');
+
+    //projects route
+    Route::get('admin/projects-add', [userProfile::class, 'projectView'])->name('projectview');
+    //project add route
+    Route::post('admin/add-project',[userProfile::class, 'addProject'])->name('projectadd.post');
 
 });
 

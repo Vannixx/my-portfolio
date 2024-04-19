@@ -33,6 +33,7 @@
                         <label for="description">Description:</label>
                         <textarea class="form-control" id="description" name="description" rows="5"></textarea>
                     </div>
+                    
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Submit</button>
                         <button type="button" class="btn btn-secondary" onclick="cancelForm()">Cancel</button>

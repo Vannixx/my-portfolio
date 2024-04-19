@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\userTable;
 use App\Models\socialTable;
+use App\Models\skillTable;
+use App\Models\projectTable;
 use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -13,6 +15,9 @@ class userProfile extends Controller{
 
     public function index(){
         $userData = userTable::all();
+        $socialData = socialTable::all();
+
+        View::share('socialData', $socialData);
         return view('welcome', ['userData' => $userData]);
     }
 
@@ -169,7 +174,47 @@ class userProfile extends Controller{
     //to view user skills
     public function userSkills(){
         $pageTitle = 'Admin | Skills';
-        return view('admin.userSkills', compact('pageTitle'));
+        $skillData = skillTable::all();
+        return view('admin.userSkills', compact('pageTitle', 'skillData'));
+    }
+
+
+    //view add page for skills
+    public function skillView(){
+        $pageTitle = 'Admin | Add Skills';
+        return view('admin.addSkills', compact('pageTitle'));
+    }
+
+    //add funciton for skills
+    public function skill_ADD(Request $request){
+        $request->validate([
+            'skillName' => 'required',
+            'skillImage' => 'required',
+        ]);
+
+        try {
+            if($request->hasFile('skillImage')){
+                $uploadedFile = $request->file('skillImage');
+                $extension = $uploadedFile->getClientOriginalExtension();
+                $fileName = uniqid() . '.' . $extension;
+                
+                $uploadedFile->move(public_path('uploads/skills'), $fileName);
+                $imagePath = 'uploads/skills/' . $fileName;
+
+                skillTable::create([
+                    'skillImage' => $imagePath,
+                    'skillName' => $request->skillName,
+                ]);
+
+                return redirect(route('userskills'))->with('success', 'User added successfully!');
+            } else {
+                return redirect()->back()->with('error', 'Please upload a user image.');
+            }
+
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred. Please try again later.');
+        }
+
     }
 
     //to view user projects
@@ -177,4 +222,45 @@ class userProfile extends Controller{
         $pageTitle = 'Admin | Projects';
         return view('admin.userProjects' , compact('pageTitle'));
     }
+
+    //to view projects add page
+    public function projectView(){
+        $pageTitle = 'Admin | Add Projects';
+        return view('admin.addProject' , compact('pageTitle'));
+    }
+
+    //function to add a project
+    public function addProject(Request $request){
+        $request->validate([
+            'projectName' => 'required',
+            'projectImage' => 'required',
+            'description' => 'required'
+        ]);
+
+        try {
+            if($request->hasFile('projectImage')){
+                $uploadedFile = $request->file('projectImage');
+                $extension = $uploadedFile->getClientOriginalExtension();
+                $fileName = uniqid() . '.' . $extension;
+                
+                $uploadedFile->move(public_path('uploads/projects'), $fileName);
+                $imagePath = 'uploads/projects/' . $fileName;
+
+                projectTable::create([
+                    'projectImage' => $imagePath,
+                    'projectName' => $request->projectName,
+                    'description' => $request->description,
+                ]);
+
+                return redirect(route('userprojects'))->with('success', 'User added successfully!');
+            } else {
+                return redirect()->back()->with('error', 'Please upload a user image.');
+            }
+
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred. Please try again later.');
+        }
+    }
+
+
 }

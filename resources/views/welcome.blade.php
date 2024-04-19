@@ -177,7 +177,22 @@
 
 
   <!-- footer -->
-    <footer class="footer">
+
+<footer class="footer">
+    <div class="social-container">
+        @foreach($socialData as $social)
+        <div class="icon-holder">
+            <span>
+                <a href="{{ $social->socialLink }}" target="_blank" rel="noopener">
+                    <img src="{{ asset($social->socialIcons) }}" alt="{{ $social->socialName }} Link" class="social-icon" style="width: 40px; height: auto;">
+                </a>
+            </span>
+        </div>
+        @endforeach
+    </div>
+</footer>
+
+    {{-- <footer class="footer">
         <div class="social-container">
             <div class="icon-holder">
                 <span>
@@ -200,7 +215,7 @@
                 </span>
             </div>
         </div>
-    </footer>
+    </footer> --}}
  
     <script>
     // back to top button
