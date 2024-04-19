@@ -33,8 +33,8 @@
                             @csrf
                             @method('DELETE')
                             <div class="card-buttons">
-                                <button type="button" class="btn-update" onclick="window.location.href = '{{ route('socialupdate') }}';"><i class="material-icons">edit</i></button>
-                                <button type="submit" class="btn-delete" onclick="return confirm('Are you sure you want to delete this project?')">
+                                <button type="button" class="btn-update" onclick="window.location.href = '{{ route('socialupdate',['id' =>$social->id]) }}';"><i class="material-icons">edit</i></button>
+                                <button type="submit" class="btn-delete" onclick="return confirm('Are you sure you want to delete this social?')">
                                     <i class="material-icons">delete</i>
                                 </button>
                             </div>

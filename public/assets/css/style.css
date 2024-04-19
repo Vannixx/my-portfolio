@@ -702,3 +702,45 @@ nav ul li a:hover::after {
 .loader-square:nth-of-type(5) { animation-delay: -7.1428571429s; }
 .loader-square:nth-of-type(6) { animation-delay: -8.5714285714s; }
 .loader-square:nth-of-type(7) { animation-delay: -10s; }
+
+
+/* new project cards design */
+.projName,
+.projDescription{
+  color: #000;
+}
+.project-cards-container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(300px, 1fr)); /* Display in 2 columns */
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+  margin-bottom: 200px;
+}
+
+.project-card {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.project-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.project-content {
+  margin-bottom: 10px;
+}
+
+.prjectName {
+  font-weight: bold;
+}
+
+.description {
+  font-weight: bold;
+}

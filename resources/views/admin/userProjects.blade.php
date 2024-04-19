@@ -1,7 +1,9 @@
 @extends('admin.content')
+
 @section('title', $pageTitle)
+
 @section('content')
-@include('admin.dashboard')
+  @include('admin.dashboard')
 
 
 <section class="home-section">
@@ -26,19 +28,20 @@
                   <img src="{{ asset($project->projectImage) }}" alt="Project Image" class="project-image">
 
                   <div class="project-card-content">
-                      <label for="" class="prjectName">Project Name</label>
+                      <label for="" class="prjectName">Project Name:</label>
                       <p class="link-container">{{ $project->projectName }}</p>
                   </div>
 
                   <div class="project-card-content">
-                    <label for="" class="description">Project Description</label>
+                    <label for="" class="description">Project Description:</label>
                     <p class="proj-description">{{ $project->description }}</p>
                   </div>
 
                   <form id="deleteForm" action="{{ route('project.delete', $project->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
-                    <div class="card-buttons" style="display: flex; justify-content: flex-end;">
+                    <div class="card-buttons">
+                      <button type="button" class="btn-update" onclick="window.location.href = '{{ route('projectupdateview',['id' =>$project->id]) }}';"><i class="material-icons">edit</i></button>
                       <button type="submit" class="btn-delete" onclick="return confirm('Are you sure you want to delete this project?')">
                         <i class="material-icons">delete</i>
                       </button>

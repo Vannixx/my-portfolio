@@ -16,8 +16,13 @@ class userProfile extends Controller{
     public function index(){
         $userData = userTable::all();
         $socialData = socialTable::all();
+        $skillData = skillTable::all();
+        $projectData = projectTable::all();
 
-        View::share('socialData', $socialData);
+
+        View::share('skillData', $skillData);
+        View::share('projectData', $projectData);
+        View::share('socialData', $socialData,);
         return view('welcome', ['userData' => $userData]);
     }
 
@@ -35,7 +40,7 @@ class userProfile extends Controller{
         return view('admin.editProfile', compact('pageTitle', 'userData'));
     }
 
-    //(update or edit profile)
+    //function to update or edit profile
     public function updateProfile(Request $request, $id){
     $request->validate([
         'userName' => 'required',
@@ -123,10 +128,10 @@ class userProfile extends Controller{
     }
 
     //update view page of social
-    public function socialUp(){
-        // $socialData = SocialTable::findOrFail($id); ,'socialData'
+    public function socialUp(int $id){
+        $socialData = socialTable::findOrFail($id); 
         $pageTitle = 'Admin | Update Social';
-        return view('admin.socialUpdate', compact('pageTitle'));
+        return view('admin.socialUpdate', compact('pageTitle','socialData'));
     }
 
     //to view add social page
@@ -147,8 +152,8 @@ class userProfile extends Controller{
     //function for adding social
     public function socialAdd(Request $request){
         $request->validate([
-            'socialIcons' => 'required',
-            'socialLink' => 'required',
+            'socialIcons' => 'required|image|mimes:jpeg,png,jpg,gif|max:10240',
+            'socialLink' => 'required|string|max:500',
         ]);
 
         try {
@@ -176,9 +181,35 @@ class userProfile extends Controller{
     }
 
     //function for updating socials
-    public function updateSocial(){
-
+    public function updateSocial(Request $request, $id) {
+        $request->validate([
+            'socialIcons' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
+            'socialLink' => 'required|string|max:500',
+        ]);
+    
+        $socialData = socialTable::findOrFail($id);
+        $socialData->socialLink = $request->socialLink;
+    
+        if ($request->hasFile('socialIcons')) {
+            // Delete the old social icon if it exists
+            if (File::exists(public_path($socialData->socialIcons))) {
+                File::delete(public_path($socialData->socialIcons));
+            }
+        
+            $uploadedFile = $request->file('socialIcons');
+            $extension = $uploadedFile->getClientOriginalExtension();
+            $fileName = uniqid() . '.' . $extension;
+            $uploadedFile->move(public_path('uploads/socials'), $fileName);
+            $imagePath = 'uploads/socials/' . $fileName;
+        
+            $socialData->socialIcons = $imagePath;
+        }
+    
+        $socialData->save();
+    
+        return redirect()->route('usersocial')->with('success', 'Social Updated successfully');
     }
+
 
     //to view user skills
     public function userSkills(){
@@ -207,8 +238,8 @@ class userProfile extends Controller{
     //add funciton for skills
     public function skill_ADD(Request $request){
         $request->validate([
-            'skillName' => 'required',
-            'skillImage' => 'required',
+            'skillName' => 'required|string|max:255',
+            'skillImage' => 'required|image|mimes:jpeg,png,jpg,gif|max:10240',
         ]);
 
         try {
@@ -249,12 +280,19 @@ class userProfile extends Controller{
         return view('admin.addProject' , compact('pageTitle'));
     }
 
+    //view update page: PROJECT
+    public function projectViewUpdate(int $id){
+        $projectData = projectTable::findOrFail($id);
+        $pageTitle = 'Admin | Update Project';
+        return view('admin.projectUpdate', compact('pageTitle', 'projectData'));
+    }
+
     //function to add a project
     public function addProject(Request $request){
         $request->validate([
-            'projectName' => 'required',
-            'projectImage' => 'required',
-            'description' => 'required'
+            'projectName' => 'required|string|max:255',
+            'projectImage' => 'required|image|mimes:jpeg,png,jpg,gif|max:10240',
+            'description' => 'required|string|max:500'
         ]);
 
         try {
@@ -280,6 +318,38 @@ class userProfile extends Controller{
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'An error occurred. Please try again later.');
         }
+    }
+    //function to update the projects
+    public function updateProject(Request $request,$id){
+        $request->validate([
+            'projectName' => 'required|string|max:255',
+            'projectImage' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240',
+            'description' => 'required|string|max:500'
+        ]);
+
+        $projectData = projectTable::findOrFail($id);
+        $projectData->projectName = $request->projectName;
+        $projectData->description = $request->description;
+    
+        if ($request->hasFile('projectImage')) {
+            // Delete the old social icon if it exists
+            if (File::exists(public_path($projectData->projectImage))) {
+                File::delete(public_path($projectData->projectImage));
+            }
+        
+            $uploadedFile = $request->file('projectImage');
+            $extension = $uploadedFile->getClientOriginalExtension();
+            $fileName = uniqid() . '.' . $extension;
+            $uploadedFile->move(public_path('uploads/projects'), $fileName);
+            $imagePath = 'uploads/projects/' . $fileName;
+        
+            $projectData->projectImage = $imagePath;
+        }
+    
+        $projectData->save();
+    
+        return redirect()->route('userprojects')->with('success', 'Social Updated successfully');
+
     }
 
     //function to delete project

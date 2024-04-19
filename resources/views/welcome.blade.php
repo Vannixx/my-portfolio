@@ -83,32 +83,20 @@
     <section id="skills">
         <div class="skills-container">
             <h1>Skills</h1>
-            <div class="icon-container">
-                
-                <div data-aos="flip-left" data-aos-delay="200">
-                    <div class="logo-container">
-                        <img src="assets/img/html-logo.png" alt="" class="html-logo">
-                    </div>
-                </div>
-                    
-                <div data-aos="flip-left" data-aos-delay="400">
-                    <div class="logo-container">
-                        <img src="assets/img/js-logo.png" alt="" class="js-logo">
-                    </div>
-                </div>
 
-                <div data-aos="flip-left" data-aos-delay="600">
-                    <div class="logo-container">
-                        <img src="assets/img/css-logo.png" alt="" class="css-logo">
+            <div class="icon-container">
+                @foreach($skillData as $index => $skill)
+                    @php
+                        $delay = $index * 200; // Calculate delay based on index
+                    @endphp
+                    <div data-aos="flip-left" data-aos-delay="{{ $delay }}">
+                        <div class="logo-container">
+                            <img src="{{ asset($skill->skillImage)}}" alt="">
+                        </div>
                     </div>
-                </div>
-                   
-                <div data-aos="flip-left" data-aos-delay="800">
-                    <div class="logo-container">
-                        <img src="assets/img/python-logo.png" alt="" class="python-logo">
-                    </div>
-                </div>   
+                @endforeach  
             </div>
+            
         </div>
     </section>
     
@@ -121,59 +109,30 @@
 
     </div>
     </section>
+    {{-- Project Cards --}}
+  <div class="project-cards-container">
+    @if ($projectData->isEmpty())
+        <div class="no-data">
+            <p>No Projects</p>
+        </div>
+    @else
+        @foreach($projectData as $project)
+            <div class="project-card">
+                <img src="{{ asset($project->projectImage) }}" alt="Project Image" class="projImage">
 
+                <div class="project-content">
+                    <label for="" class="prjectName">Project Name:</label>
+                    <p class="projName">{{ $project->projectName }}</p>
+                </div>
 
-    <!-- blog cards -->
-    <div class="blog-card">
-        <div class="meta">
-            <div class="photo" style="background-image: url(https://storage.googleapis.com/chydlx/codepen/blog-cards/image-1.jpg)"></div>
-                <ul class="details">
-                    <li class="author"><a href="#">John Doe</a></li>
-                    <li class="date">Aug. 24, 2015</li>
-                    <li class="tags">
-                    <ul>    
-                        <li><a href="#">Learn</a></li>
-                        <li><a href="#">Code</a></li>
-                        <li><a href="#">HTML</a></li>
-                        <li><a href="#">CSS</a></li>
-                    </ul>
-                </li>
-                </ul>
-        </div>
-        <div class="description">
-            <h1>Learning to Code</h1>
-            <h2>Opening a door to the future</h2>
-            <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eum dolorum architecto obcaecati enim dicta praesentium, quam nobis! Neque ad aliquam facilis numquam. Veritatis, sit.</p>
-            <p class="read-more">
-            <a href="#">Read More</a>
-            </p>
-        </div>
-    </div>
-    <div class="blog-card alt">
-        <div class="meta">
-            <div class="photo" style="background-image: url(https://storage.googleapis.com/chydlx/codepen/blog-cards/image-2.jpg)"></div>
-                <ul class="details">
-                    <li class="author"><a href="#">Jane Doe</a></li>
-                    <li class="date">July. 15, 2015</li>
-                    <li class="tags">
-                    <ul>
-                        <li><a href="#">Learn</a></li>
-                        <li><a href="#">Code</a></li>
-                        <li><a href="#">JavaScript</a></li>
-                    </ul>
-                    </li>
-                </ul>
-        </div>
-        <div class="description">
-            <h1>Mastering the Language</h1>
-            <h2>Java is not the same as JavaScript</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eum dolorum architecto obcaecati enim dicta praesentium, quam nobis! Neque ad aliquam facilis numquam. Veritatis, sit.</p>
-            <p class="read-more">
-                <a href="#">Read More</a>
-            </p>
-        </div>
-    </div>
-  <!-- blog cards end -->
+                <div class="project-content">
+                  <label for="" class="description">Project Description:</label>
+                  <p class="projDescription">{{ $project->description }}</p>
+                </div>
+            </div>
+        @endforeach
+    @endif
+</div>
 
 
   <!-- footer -->
