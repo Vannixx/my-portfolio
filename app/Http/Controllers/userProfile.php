@@ -16,7 +16,7 @@ class userProfile extends Controller{
     public function index(){
         $userData = userTable::all();
         $socialData = socialTable::all();
-
+        
         View::share('socialData', $socialData);
         return view('welcome', ['userData' => $userData]);
     }
@@ -220,7 +220,8 @@ class userProfile extends Controller{
     //to view user projects
     public function userProjects(){
         $pageTitle = 'Admin | Projects';
-        return view('admin.userProjects' , compact('pageTitle'));
+        $projectData = projectTable::all();
+        return view('admin.userProjects' , compact('pageTitle', 'projectData'));
     }
 
     //to view projects add page

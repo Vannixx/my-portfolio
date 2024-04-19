@@ -273,3 +273,34 @@ textarea {
     width: 50px;
     height: 50px;
 }
+
+
+/* project view design */
+.project-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.project-card {
+    width: 100%;
+    background-color: #fff; 
+    border: 1px solid #e9ecef;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px; 
+}
+
+.project-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px; /* Add margin between image and content */
+}
+
+.project-card-content {
+    margin-bottom: 10px; /* Add margin between content sections */
+}

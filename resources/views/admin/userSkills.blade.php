@@ -36,10 +36,7 @@
       @endif
   </div> 
 
-
-
-
-</section>
+  </section>
 
 <script>
   function skillADD() {
