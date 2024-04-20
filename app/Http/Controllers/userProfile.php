@@ -45,7 +45,7 @@ class userProfile extends Controller{
     $request->validate([
         'userName' => 'required',
         'userRole' => 'required',
-        'userImage' => 'image|mimes:jpeg,png,jpg,gif|max:10240', 
+        'userImage' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240', 
         'description' => 'required|string|max:500',
     ]);
 
