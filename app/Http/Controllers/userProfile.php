@@ -361,6 +361,4 @@ class userProfile extends Controller{
         $project->delete();
         return redirect()->route('userprojects')->with('success', 'Project deleted successfully!');
     }
-
-
 }
