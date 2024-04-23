@@ -11,16 +11,15 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthAdmin extends Controller
 {
+    function dashboard(){
+        return view('admin.dashboard');
+    }
     //to check if nag-log in ang user
     function login(){
         if(Auth::check()){
             return redirect()->intended(route('userprofile'))->with("success");
         }
         return view('admin.Login');
-    }
-
-    function dashboard(){
-        return view('admin.dashboard');
     }
     //Register
     function registerPost(Request $request){
