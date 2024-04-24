@@ -13,6 +13,7 @@
 
 body{
   background: #121012;
+  width: 100%;
   /* background: #262322; */
 
 }
@@ -322,11 +323,19 @@ nav ul li a:hover::after {
 
 /* FOOTER */
 /* SOCIAL ICONS FOOTER */
+@media(max-width:576px){
+  .footer{
+    padding: 10px 0;
+    font-size: 14px;
+  }
+}
 .footer {
   position: relative;
   background-color: #f5f5f5;
   padding: 20px 0;
-  text-align: center;
+  width: 100%;
+  left: 0;
+  bottom: 0;
 }
 
 .social-container {
